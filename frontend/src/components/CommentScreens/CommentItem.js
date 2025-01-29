@@ -19,7 +19,7 @@ const CommentItem = ({ comment, activeUser }) => {
 
             const comment_id = comment._id
             try {
-                const { data } = await axios.post(`https://ilan.onrender.com/comment/${comment_id}/getCommentLikeStatus`, { activeUser }, {
+                const { data } = await axios.post(`https://sparko-tracking.onrender.com/comment/${comment_id}/getCommentLikeStatus`, { activeUser }, {
                     headers: {
                         "Content-Type": "application/json",
                         authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -50,7 +50,7 @@ const CommentItem = ({ comment, activeUser }) => {
         const comment_id = comment._id
 
         try {
-            const { data } = await axios.post(`https://vishis-mauve.vercel.app/comment/${comment_id}/like`, { activeUser }, {
+            const { data } = await axios.post(`https://sparko-tracking.onrender.com/comment/${comment_id}/like`, { activeUser }, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("authToken")}`,

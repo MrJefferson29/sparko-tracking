@@ -24,7 +24,7 @@ const RegisterScreen = () => {
 
     try {
       const { data } = await axios.post(
-        "https://ilan.onrender.com/auth/register",
+        "https://sparko-tracking.onrender.com/auth/register",
         {
           username,
           email,

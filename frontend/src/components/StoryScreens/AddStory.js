@@ -56,7 +56,7 @@ const AddStory = () => {
 
     try {
       const { data } = await axios.post(
-        "https://ilan.onrender.com/story/addstory",
+        "https://sparko-tracking.onrender.com/story/addstory",
         formData,
         config
       );

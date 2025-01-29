@@ -40,7 +40,7 @@ const Home = () => {
   const getStories = async () => {
     setLoading(true);
     try {
-      let url = `story/getAllStories?page=${page}`;
+      let url = `https://sparko-tracking.onrender.com/story/getAllStories?page=${page}`;
       if (searchKey) {
         url += `&search=${searchKey}`;
       }

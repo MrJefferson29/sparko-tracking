@@ -21,7 +21,7 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
 
         e.preventDefault();
         try {
-            await axios.post(`https://ilan.onrender.com/comment/${slug}/addComment`, { content, star }, {
+            await axios.post(`https://sparko-tracking.onrender.com/comment/${slug}/addComment`, { content, star }, {
                 headers: {
                     "Content-Type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("authToken")}`,
