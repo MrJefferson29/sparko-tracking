@@ -16,9 +16,9 @@ router.post("/:slug", checkStoryExist, detailStory)
 
 router.post("/:slug/like",[getAccessToRoute,checkStoryExist] ,likeStory)
 
-router.get("/editStory/:slug",[getAccessToRoute,checkStoryExist,checkUserAndStoryExist] , editStoryPage)
+router.get("/editStory/:slug", editStoryPage)
 
-router.put("/:slug/edit",[getAccessToRoute,checkStoryExist,checkUserAndStoryExist] ,editStory)
+router.put("/:slug/edit", editStory);
 
 router.delete("/:slug/delete",[getAccessToRoute,checkStoryExist,checkUserAndStoryExist] ,deleteStory)
 
