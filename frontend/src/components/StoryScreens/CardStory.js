@@ -35,13 +35,11 @@ const Story = ({ story }) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          // Include Authorization header if token exists
           ...(activeUser && activeUser.token && { Authorization: `Bearer ${activeUser.token}` }),
         },
         body: JSON.stringify({ status: newStatus }),
       });
 
-      // Log raw response for debugging
       const responseText = await response.text();
       console.log("Raw response:", responseText);
 
@@ -109,7 +107,8 @@ const Story = ({ story }) => {
             </Col>
           </Row>
 
-          {activeUser && (
+          {/* Only show edit form if activeUser exists */}
+          {activeUser ? (
             <Row className="edit-status-form">
               <Col md="12">
                 <h4>Edit Package Status</h4>
@@ -128,7 +127,7 @@ const Story = ({ story }) => {
                 {successMsg && <p className="success-msg">{successMsg}</p>}
               </Col>
             </Row>
-          )}
+          ) : null}
 
           <Row className="map-section">
             <Col md="12">
