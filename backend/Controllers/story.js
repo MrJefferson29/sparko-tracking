@@ -121,52 +121,57 @@ const likeStory =asyncErrorWrapper(async(req,res,next)=>{
 
 })
 
-const editStoryPage  =asyncErrorWrapper(async(req,res,next)=>{
-    const {slug } = req.params ; 
-   
-    const story = await Story.findOne({
-        slug: slug 
-    }).populate("author likes")
-
-    return res.status(200).
-        json({
-            success:true,
-            data : story
-    })
-
-})
-
-
-const editStory  =asyncErrorWrapper(async(req,res,next)=>{
-    const {slug } = req.params ; 
-    const {title ,content, address, status, time, packageName, location, weight, carrier, long, lat } = req.body;
-
-    const story = await Story.findOne({slug : slug })
-
-    story.title = title ;
-    story.content = content ;
-    story.address = address;
-    story.status = status;
-    story.time = time;
-    story.packageName = packageName;
-    story.location = location;
-    story.weight = weight;
-    story.carrier = carrier;
-    story.long = long;
-    story.lat = lat;
-
-
-
-    await story.save()  ;
-
-    return res.status(200).
-        json({
-            success:true,
-            data :story
-    })
-
-})
-
+const editStoryPage = asyncErrorWrapper(async (req, res, next) => {
+    const { slug } = req.params;
+  
+    const story = await Story.findOne({ slug }).populate("author likes");
+  
+    return res.status(200).json({
+      success: true,
+      data: story,
+    });
+  });
+  
+  const editStory = asyncErrorWrapper(async (req, res, next) => {
+    const { slug } = req.params;
+    const updates = req.body; // Contains the fields to update (e.g., just status)
+  
+    // Find the story by slug
+    const story = await Story.findOne({ slug });
+    if (!story) {
+      return res.status(404).json({ success: false, message: "Story not found" });
+    }
+  
+    // List of fields that can be updated
+    const updatableFields = [
+      "title",
+      "content",
+      "address",
+      "status",
+      "time",
+      "packageName",
+      "location",
+      "weight",
+      "carrier",
+      "long",
+      "lat",
+    ];
+  
+    // Update only the fields provided in the request
+    updatableFields.forEach((field) => {
+      if (updates[field] !== undefined) {
+        story[field] = updates[field];
+      }
+    });
+  
+    await story.save();
+  
+    return res.status(200).json({
+      success: true,
+      data: story,
+    });
+  });
+  
 const deleteStory  =asyncErrorWrapper(async(req,res,next)=>{
 
     const {slug} = req.params  ;
