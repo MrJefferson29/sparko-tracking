@@ -5,32 +5,31 @@ export const AuthContext = React.createContext();
 
 const AuthContextProvider = props => {
 
-  const [activeUser, setActiveUser] = useState({})
+  // Initialize as null instead of {}
+  const [activeUser, setActiveUser] = useState(null);
   const [config, setConfig] = useState({
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem("authToken")}`,
     },
-  })
-
+  });
 
   useEffect(() => {
 
     const controlAuth = async () => {
       try {
-        const { data } = await axios.get("https://sparko-tracking.onrender.com/auth/private", config);
-        setActiveUser(data.user)
+        const { data } = await axios.get("https://vishis-mauve.vercel.app/auth/private", config);
+        setActiveUser(data.user);
       }
       catch (error) {
-
         localStorage.removeItem("authToken");
-
-        setActiveUser({})
+        // Set activeUser to null when authentication fails
+        setActiveUser(null);
       }
     };
-    controlAuth()
+    controlAuth();
 
-  }, [])
+  }, [config]);
 
   return (
     <AuthContext.Provider value={{ activeUser, setActiveUser, config, setConfig }}>
