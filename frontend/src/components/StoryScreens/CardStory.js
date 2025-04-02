@@ -17,7 +17,7 @@ const customIcon = new L.Icon({
 
 const Story = ({ story }) => {
   const hasValidCoordinates = !isNaN(story.lat) && !isNaN(story.long);
-  const { activeUser } = useContext(AuthContext); // Destructure activeUser from context
+  const { activeUser } = useContext(AuthContext);
   const [newStatus, setNewStatus] = useState(story.status);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState("");
@@ -107,8 +107,8 @@ const Story = ({ story }) => {
             </Col>
           </Row>
 
-          {/* Only show edit form if activeUser is not an empty object */}
-          {Object.keys(activeUser).length > 0 ? (
+          {/* Only show edit form if activeUser exists */}
+          {activeUser ? (
             <Row className="edit-status-form">
               <Col md="12">
                 <h4>Edit Package Status</h4>
