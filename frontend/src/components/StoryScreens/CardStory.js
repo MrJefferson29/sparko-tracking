@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import styled from "styled-components";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -17,7 +17,18 @@ const customIcon = new L.Icon({
 
 const Story = ({ story }) => {
   const hasValidCoordinates = !isNaN(story.lat) && !isNaN(story.long);
+  
+  // Mimic header's authentication check using localStorage token
+  const bool = localStorage.getItem("authToken") ? true : false;
+  const [auth, setAuth] = useState(bool);
+  
+  useEffect(() => {
+    setAuth(bool);
+  }, [bool]);
+  
+  // Also retrieve activeUser from AuthContext if needed elsewhere
   const { activeUser } = useContext(AuthContext);
+  
   const [newStatus, setNewStatus] = useState(story.status);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState("");
@@ -107,8 +118,8 @@ const Story = ({ story }) => {
             </Col>
           </Row>
 
-          {/* Only show edit form if activeUser exists */}
-          {activeUser ? (
+          {/* Edit form is only shown if auth (i.e. a token exists in localStorage) is true */}
+          {auth ? (
             <Row className="edit-status-form">
               <Col md="12">
                 <h4>Edit Package Status</h4>
