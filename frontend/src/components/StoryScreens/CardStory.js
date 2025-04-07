@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import styled from "styled-components";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -17,39 +17,28 @@ const customIcon = new L.Icon({
 
 const Story = ({ story }) => {
   const hasValidCoordinates = !isNaN(story.lat) && !isNaN(story.long);
-  
-  // Mimic header's authentication check using localStorage token
-  const bool = localStorage.getItem("authToken") ? true : false;
-  const [auth, setAuth] = useState(bool);
-  
-  useEffect(() => {
-    setAuth(bool);
-  }, [bool]);
-  
-  // Also retrieve activeUser from AuthContext if needed elsewhere
-  const { activeUser } = useContext(AuthContext);
-  
+  // Destructure real activeUser and config from context
+  const { activeUser, config } = useContext(AuthContext);
   const [newStatus, setNewStatus] = useState(story.status);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-
-  console.log("Coordinates:", story.lat, story.long);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUpdating(true);
     setError("");
     setSuccessMsg("");
+
     try {
-      const response = await fetch(`https://sparko-tracking.onrender.com/story/${story.slug}/edit`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          ...(activeUser && activeUser.token && { Authorization: `Bearer ${activeUser.token}` }),
-        },
-        body: JSON.stringify({ status: newStatus }),
-      });
+      const response = await fetch(
+        `https://sparko-tracking.onrender.com/story/${story.slug}/edit`,
+        {
+          method: "PUT",
+          headers: config.headers,
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
 
       const responseText = await response.text();
       console.log("Raw response:", responseText);
@@ -118,8 +107,8 @@ const Story = ({ story }) => {
             </Col>
           </Row>
 
-          {/* Edit form is only shown if auth (i.e. a token exists in localStorage) is true */}
-          {auth ? (
+          {/* Only render edit form if there's a logged-in user */}
+          {activeUser && activeUser._id && (
             <Row className="edit-status-form">
               <Col md="12">
                 <h4>Edit Package Status</h4>
@@ -138,7 +127,7 @@ const Story = ({ story }) => {
                 {successMsg && <p className="success-msg">{successMsg}</p>}
               </Col>
             </Row>
-          ) : null}
+          )}
 
           <Row className="map-section">
             <Col md="12">
@@ -168,27 +157,36 @@ const Story = ({ story }) => {
           <Row className="additional-info">
             <Col md="12">
               <h4>Additional Information</h4>
-              <p>{story.lat}, {story.long}</p>
-              <p className="notes">
-                <strong>Delivery Notes:</strong> Please ensure someone is available to receive the package...
+              <p>
+                Coordinates: {story.lat}, {story.long}
               </p>
               <p className="notes">
-                <strong>Proof of Delivery:</strong> A signature will be required upon delivery...
+                <strong>Delivery Notes:</strong> Please ensure someone is
+                available to receive the package...
               </p>
               <p className="notes">
-                <strong>Exception Notifications:</strong> You will receive notifications for any delivery issues...
+                <strong>Proof of Delivery:</strong> A signature will be
+                required upon delivery...
               </p>
               <p className="notes">
-                <strong>Insurance Information:</strong> Shipment insurance is required...
+                <strong>Exception Notifications:</strong> You will receive
+                notifications for any delivery issues...
               </p>
               <p className="notes">
-                <strong>Weather Conditions:</strong> Weather conditions may impact delivery schedules...
+                <strong>Insurance Information:</strong> Shipment insurance is
+                required...
+              </p>
+              <p className="notes">
+                <strong>Weather Conditions:</strong> Weather conditions may
+                impact delivery schedules...
               </p>
               <p className="contact-info">
-                <strong>Contact Information:</strong> For inquiries, contact our support at{" "}
+                <strong>Contact Information:</strong> For inquiries, contact
+                our support at{" "}
                 <a href="mailto:albatrossexpresslogistics@gmail.com">
                   albatrossexpresslogistics@gmail.com
-                </a>.
+                </a>
+                .
               </p>
             </Col>
           </Row>
