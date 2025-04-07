@@ -13,11 +13,12 @@ const AuthContextProvider = props => {
     },
   })
 
+
   useEffect(() => {
 
     const controlAuth = async () => {
       try {
-        const { data } = await axios.get("https://vishis-mauve.vercel.app/auth/private", config);
+        const { data } = await axios.get("https://sparko-tracking.onrender.com/auth/private", config);
         setActiveUser(data.user)
       }
       catch (error) {
