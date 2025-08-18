@@ -183,8 +183,8 @@ const Story = ({ story }) => {
               <p className="contact-info">
                 <strong>Contact Information:</strong> For inquiries, contact
                 our support at{" "}
-                <a href="mailto:albatrossexpresslogistics@gmail.com">
-                  albatrossexpresslogistics@gmail.com
+                <a href="mailto:arbatrossdelivery@gmail.com">
+                  arbatrossdelivery@gmail.com
                 </a>
                 .
               </p>
