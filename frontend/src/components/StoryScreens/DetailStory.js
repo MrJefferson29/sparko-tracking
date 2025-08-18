@@ -65,7 +65,7 @@ const Story = ({ story }) => {
                 <strong>Weather Conditions:</strong> Weather conditions may impact delivery schedules. We monitor updates to minimize disruptions.
               </p>
               <p className="contact-info">
-                <strong>Contact Information:</strong> For inquiries, contact our support at albatrossexpresslogistics@gmail.com. Visit our tracking portal for real-time updates and additional information.
+                <strong>Contact Information:</strong> For inquiries, contact our support at arbatrossdelivery@gmail.com. Visit our tracking portal for real-time updates and additional information.
               </p>
             </Col>
           </Row>
