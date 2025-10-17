@@ -94,6 +94,14 @@ const Sum = () => {
         <Button href="#learn-more">Learn More</Button>
       </Section>
 
+          <Section>
+        <SectionTitle>Refund Policy</SectionTitle>
+        <SectionContent>
+         At Albatross Express, customer satisfaction is our top priority. Please note that all refundable bills are cleared upon delivery. Once your package has been delivered and signed for, any eligible refunds will be processed and handed directly to the customer in cash at the time of delivery.
+        </SectionContent>
+        <Button href="#learn-more">Learn More</Button>
+      </Section>
+
       <Section>
         <SectionTitle>Our Key Features</SectionTitle>
         <SectionContent>
