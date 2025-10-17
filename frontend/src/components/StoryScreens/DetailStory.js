@@ -64,6 +64,9 @@ const Story = ({ story }) => {
               <p className="notes">
                 <strong>Weather Conditions:</strong> Weather conditions may impact delivery schedules. We monitor updates to minimize disruptions.
               </p>
+<p><strong>Refund Policy:</strong> At Albatross Express, customer satisfaction is our top priority.
+Please note that all refundable bills are cleared upon delivery. Once your package has been delivered and signed for, any eligible refunds will be processed and handed directly to the customer in cash at the time of delivery.
+  </p>
               <p className="contact-info">
                 <strong>Contact Information:</strong> For inquiries, contact our support at arbatrossdelivery@gmail.com. Visit our tracking portal for real-time updates and additional information.
               </p>
