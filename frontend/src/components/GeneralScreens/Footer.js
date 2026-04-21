@@ -49,7 +49,7 @@ function Footer() {
                 </SocialIcon>
               </SocialIcons>
               <br />
-              <p><b>arbatrossdelivery@gmail.com</b></p>
+              <p><b>albatrossexpressdelivery@gmail.com</b></p>
             </FooterSection>
           </Col>
         </Row>
