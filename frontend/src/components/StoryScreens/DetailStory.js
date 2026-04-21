@@ -68,7 +68,7 @@ const Story = ({ story }) => {
 Please note that all refundable bills are cleared upon delivery. Once your package has been delivered and signed for, any eligible refunds will be processed and handed directly to the customer in cash at the time of delivery.
   </p>
               <p className="contact-info">
-                <strong>Contact Information:</strong> For inquiries, contact our support at arbatrossdelivery@gmail.com. Visit our tracking portal for real-time updates and additional information.
+                <strong>Contact Information:</strong> For inquiries, contact our support at albatrossexpressdelivery@gmail.com. Visit our tracking portal for real-time updates and additional information.
               </p>
             </Col>
           </Row>
